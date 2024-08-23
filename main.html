@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="personal profile page of veera">
+    <title>veera's profile</title>
+    <link rel="icon" href="date.png">
+    <link rel="stylesheet" href="style1.css">
+    
+</head>
+<body>
+    <center>
+        <!--used as header javascript is also used in buttonn tag-->
+        <header>
+           <h1>This is veera,<span class="aboutMe" ><button onclick="changeAboutMeText()"></button></span></h1>
+           <p>Welcome To My World </p>
+        </header>
+        <hr><!--hr tag is used for horizontal lines-->
+        <section><!--section tag are meaningless tag which is used as container-->
+            <h2>About Me</h2>
+            <p>Hello,I'm veeraveni .and here's a little about me </p>  
+            <img src="emc.png" alt="it is a logo " id="image"  >
+        </section>
+        <hr>
+        <section>
+            <h1>Contact Information</h1>
+            <p>Lets's connect!</p>
+            <a href="mailto:veniv665.@gmail.com"><img src="email .png" alt="email icon"></a>   ||  <a href="https://in.linkedin.com/"><img src="Screenshot 2024-08-08 075719.png" alt="linkedin icon"></a>
+        </section>
+        <hr>
+        <section>
+            <h1>My Skills</h1>
+            <table >
+                <tr>
+                    
+                        <ul>
+                            <li>web developer</li>
+                            <li>graphic designer</li>
+                            <li>photographer</li>
+                        </ul>
+                    
+                </tr>      
+            </table>
+        </section>
+        <hr>
+        <section class="programming-language" event="addEventListener()"><!--these are used in javascript-->
+            <h2>Programming language</h2>
+            <div class="skills">
+                <p>Javascript</p>
+                 <div class="progress-bar" data progress="40" id="javascript">40%</div>
+            </div>
+            <div class="skills">
+                <p>HTML</p>
+                 <div class="progress-bar" data progress="90" id="html">90%</div>
+            </div>
+            <div class="skills">
+                <p>CSS</p>
+                 <div class="progress-bar" data progress="60"id="css">60%</div>
+            </div>
+
+        </section>
+        <hr>
+        <section>
+            <h1>portfolio</h1>
+            <p>Take a look at some of my works</p>
+            <div class="box">
+                <img href="D:\three month full stack development\demo sample\project.png" alt="project img" id="imagestyle" >
+                <p>
+                    Technology is a broad and dynamic field that encompasses the application of scientific knowledge for practical purposes. 
+                </p>
+                <a href="C:\Users\veera\Desktop\to do list\to do.html">Project Overview</a>
+
+            </div>
+            <div class="box">
+                <img href="D:\three month full stack development\demo sample\project.png" alt="project img" id="imagesstyle" >
+                <p>
+                    Technology is a broad and dynamic field that encompasses the application of scientific knowledge for practical purposes. 
+                </p>
+                <a href="project_css_1.html">Project Overview</a>
+            </div>
+        </section>
+        <hr>
+        <section>
+            <form>
+                <h1>Contact Me</h1>
+                <label for="name">Name :</label>
+                <input id="name">
+                    <br>
+                    <br>
+                <label for="email">Email :</label>
+                <input id="email">
+                <br>
+                <br>
+                <label for="message">Message</label>
+                <textarea id="message" >message</textarea><br>
+                <br>
+                <button type="submit">send</button>
+            </form>
+        </section>
+        <footer><!--these tag used for ending copy right button -->
+             <p>&copy;made by veera on 2024,studing at mahendra engineering collage</p>
+        </footer>
+
+       
+
+
+    </center>
+
+</body>
+</html>
+<!--javascript-->
+
+<script>
+   
+
+   function changeAboutMeText() {
+    const aboutMeTexts = [" front end Developer","" ];
+    const typingSpeed = 100;
+    const eraseSpeed = 50;
+    const pauseTime = 500;
+    const aboutMeElement = document.querySelector('.aboutMe');
+
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentText = aboutMeTexts[textIndex];
+        
+        if (!isDeleting && charIndex < currentText.length) {
+            aboutMeElement.textContent += currentText[charIndex];
+            charIndex++;
+            setTimeout(type, typingSpeed);
+        } else if (isDeleting && charIndex > 0) {
+            aboutMeElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(type, eraseSpeed);
+        } else {
+            isDeleting = !isDeleting;
+            if (!isDeleting) {
+                textIndex = (textIndex + 1) % aboutMeTexts.length;
+                setTimeout(type, pauseTime);
+            } else {
+                setTimeout(type, typingSpeed);
+            }
+        }
+    }
+
+    type();
+}
+
+document.addEventListener('DOMContentLoaded', function()
+ {
+    // Create an IntersectionObserver instance
+    const observer = new IntersectionObserver(entries => 
+    {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) 
+            {
+                // Find the progress bar within the intersecting element
+                const progressBar = entry.target.querySelector('.progress-bar');
+                if (progressBar) 
+                {
+                    const progress = progressBar.dataset.progress;
+                    if (progress) 
+                    {
+                        // Update the progress bar's style and add animation class
+                        progressBar.style.setProperty(`--progress`, `${progress}%`);
+                        progressBar.classList.add('animated');
+                        // Stop observing this element
+                        observer.unobserve(entry.target);
+                    }
+                }
+            }
+        });
+    });
+
+    // Select all skill elements to be observed
+    const programmingLanguageSkills = document.querySelectorAll('.programming-language .skills');
+    programmingLanguageSkills.forEach(skill => {
+        observer.observe(skill);
+    });
+});
+
+
+
+
+</script>
